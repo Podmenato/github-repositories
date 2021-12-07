@@ -4,12 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 import theme from 'theme';
 import Routing from 'components/Routing';
+import Layout from 'components/Layout';
 
 const App = () => (
 	<ThemeProvider theme={theme}>
 		<CssBaseline />
 		<BrowserRouter>
-			<Routing />
+			<Layout>
+				<Routing />
+			</Layout>
 		</BrowserRouter>
 	</ThemeProvider>
 );
