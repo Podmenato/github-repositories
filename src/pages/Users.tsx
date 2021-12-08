@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, List, ListItem, ListItemText, Paper } from '@mui/material';
 
 import { getuserData } from 'api/github-api';
 import { TUser } from 'types/TUser';
@@ -8,14 +8,17 @@ import SearchInput from 'components/SearchInput';
 import OrganizationsList from 'components/OrganizationsList';
 import RepositoriesList from 'components/RepositoriesList';
 import { handleFetch } from 'utils/handleFetch';
+import useRecentSearches, { addUsername } from 'hooks/useRecentSearches';
 
 const Users = () => {
 	const [userData, setUserData] = useState<TUser | null>(null);
+	const [recent, setRecent] = useRecentSearches();
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 
 	const fetchUserData = async (userName: string) => {
 		const fetchData = () => getuserData(userName);
+		setRecent(addUsername(userName, recent));
 		handleFetch({
 			setData: setUserData,
 			setError,
@@ -47,6 +50,15 @@ const Users = () => {
 					</Grid>
 				</Grid>
 			)}
+			<Paper>
+				<List>
+					{recent.map((username: string) => (
+						<ListItem key={username}>
+							<ListItemText>{username}</ListItemText>
+						</ListItem>
+					))}
+				</List>
+			</Paper>
 		</Box>
 	);
 };
