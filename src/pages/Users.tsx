@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { getuserData } from 'api/github-api';
 import { TUser } from 'types/TUser';
+import UserDataDisplay from 'components/UserDataDisplay';
 
 const Users = () => {
 	const [userData, setUserData] = useState<TUser | null>(null);
@@ -12,7 +13,7 @@ const Users = () => {
 		};
 		fetchData();
 	}, []);
-	return <div />;
+	return <div>{userData && <UserDataDisplay user={userData} />}</div>;
 };
 
 export default Users;
