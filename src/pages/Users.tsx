@@ -8,7 +8,7 @@ const Users = () => {
 	const [userData, setUserData] = useState<TUser | null>(null);
 	useEffect(() => {
 		const fetchData = async () => {
-			const data: TUser = await getuserData('Podmenato');
+			const data: TUser = await getuserData('user');
 			setUserData(data);
 		};
 		fetchData();
