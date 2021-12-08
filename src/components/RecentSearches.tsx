@@ -14,13 +14,13 @@ const RecentSearches: FC<TProps> = ({ usernames }) => (
 		}}
 	>
 		<Typography variant="h5">Recent Searches</Typography>
-
 		<List>
 			{usernames.map((username: string) => (
 				<ListItem key={username}>
 					<ListItemText>{username}</ListItemText>
 				</ListItem>
 			))}
+			{usernames.length === 0 && <Typography variant="h6">None</Typography>}
 		</List>
 	</Paper>
 );
