@@ -1,12 +1,13 @@
 import React, { FC, useState } from 'react';
-import { Button, Paper, TextField } from '@mui/material';
+import { Button, CircularProgress, Paper, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 type TProps = {
 	callbackFunction: (query: string) => void;
+	loading: boolean;
 };
 
-const SearchInput: FC<TProps> = ({ callbackFunction }) => {
+const SearchInput: FC<TProps> = ({ callbackFunction, loading }) => {
 	const [userInput, setUserInput] = useState<string>('');
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +34,8 @@ const SearchInput: FC<TProps> = ({ callbackFunction }) => {
 				}}
 			/>
 			<Button variant="contained" onClick={() => callbackFunction(userInput)}>
-				<SearchIcon />
+				{loading && <CircularProgress color="inherit" size={20} />}
+				{!loading && <SearchIcon />}
 			</Button>
 		</Paper>
 	);
