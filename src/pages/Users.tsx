@@ -5,6 +5,7 @@ import { getuserData } from 'api/github-api';
 import { TUser } from 'types/TUser';
 import UserDataDisplay from 'components/UserDataDisplay';
 import SearchInput from 'components/SearchInput';
+import OrganizationsList from 'components/OrganizationsList';
 
 const Users = () => {
 	const [userData, setUserData] = useState<TUser | null>(null);
@@ -20,6 +21,7 @@ const Users = () => {
 
 			{userData && <UserDataDisplay user={userData} />}
 			{userData && <RepositoriesList userName={userData.login} />}
+			{userData && <OrganizationsList userName={userData.login} />}
 		</div>
 	);
 };
