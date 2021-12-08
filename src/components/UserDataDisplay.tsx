@@ -1,5 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Avatar, Box, Icon, Link, Tooltip, Typography } from '@mui/material';
+import {
+	Avatar,
+	Box,
+	Icon,
+	Link,
+	Paper,
+	Tooltip,
+	Typography
+} from '@mui/material';
 import BusinessIcon from '@mui/icons-material/Business';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PublicIcon from '@mui/icons-material/Public';
@@ -29,7 +37,7 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 		getAvatar();
 	}, [user]);
 	return (
-		<Box sx={{ padding: '5px' }}>
+		<Paper sx={{ padding: '5px' }}>
 			<Box sx={boxStyle}>
 				<Avatar src={imageURL} sx={{ marginRight: '10px' }} />
 				<Box>
@@ -91,7 +99,7 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 					<Typography variant="h6">{user.location}</Typography>
 				</Box>
 			)}
-		</Box>
+		</Paper>
 	);
 };
 

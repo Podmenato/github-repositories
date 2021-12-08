@@ -20,8 +20,6 @@ const Layout: FC = ({ children }) => (
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
 					minHeight: '100vh',
 					padding: '100px 30px',
 					backgroundColor: 'bgPrimary'
