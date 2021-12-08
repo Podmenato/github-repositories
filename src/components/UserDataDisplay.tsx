@@ -16,10 +16,10 @@ import PublicIcon from '@mui/icons-material/Public';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { SxProps } from '@mui/system';
 import { format, formatDistance } from 'date-fns';
-import axios from 'axios';
 
 import { TUser } from 'types/TUser';
 import { fetchImage } from 'api/util';
+import { handleFetch } from 'utils/handleFetch';
 
 type TProps = {
 	user: TUser;
@@ -37,23 +37,8 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 	};
 
 	useEffect(() => {
-		const getAvatar = async () => {
-			setError(null);
-			setLoading(true);
-			try {
-				const imgUrl = await fetchImage(user.avatar_url);
-				setImageURL(imgUrl);
-			} catch (e) {
-				let message = `Failed to fetch user avatar.`;
-				if (axios.isAxiosError(e)) {
-					message += ` Reason: ${e.message}`;
-				}
-				setError(message);
-			} finally {
-				setLoading(false);
-			}
-		};
-		getAvatar();
+		const fetchData = () => fetchImage(user.avatar_url);
+		handleFetch({ setLoading, setError, fetchData, setData: setImageURL });
 	}, [user]);
 
 	return (

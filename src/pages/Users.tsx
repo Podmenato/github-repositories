@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
-import axios from 'axios';
 
 import { getuserData } from 'api/github-api';
 import { TUser } from 'types/TUser';
@@ -8,6 +7,7 @@ import UserDataDisplay from 'components/UserDataDisplay';
 import SearchInput from 'components/SearchInput';
 import OrganizationsList from 'components/OrganizationsList';
 import RepositoriesList from 'components/RepositoriesList';
+import { handleFetch } from 'utils/handleFetch';
 
 const Users = () => {
 	const [userData, setUserData] = useState<TUser | null>(null);
@@ -15,20 +15,13 @@ const Users = () => {
 	const [loading, setLoading] = useState(false);
 
 	const fetchUserData = async (userName: string) => {
-		setError(null);
-		setLoading(true);
-		try {
-			const userData: TUser = await getuserData(userName);
-			setUserData(userData);
-		} catch (e) {
-			let message = `Failed to fetch user.`;
-			if (axios.isAxiosError(e)) {
-				message += ` Reason: ${e.message}`;
-			}
-			setError(message);
-		} finally {
-			setLoading(false);
-		}
+		const fetchData = () => getuserData(userName);
+		handleFetch({
+			setData: setUserData,
+			setError,
+			setLoading,
+			fetchData
+		});
 	};
 
 	return (
