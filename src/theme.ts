@@ -21,6 +21,7 @@ const theme = createTheme({
 		footer: '#5c0097'
 	},
 	typography: {
+		fontFamily: 'Lato',
 		h6: {
 			'fontSize': '20px',
 			'@media (max-width:700px)': {
