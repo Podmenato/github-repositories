@@ -19,6 +19,20 @@ const theme = createTheme({
 		secondary: { main: '#ffeb3b' },
 		bgPrimary: '#deb0fd',
 		footer: '#5c0097'
+	},
+	typography: {
+		h6: {
+			'fontSize': '20px',
+			'@media (max-width:700px)': {
+				fontSize: '16px'
+			}
+		},
+		h4: {
+			'fontSize': '30px',
+			'@media (max-width:700px)': {
+				fontSize: '20px'
+			}
+		}
 	}
 });
 
