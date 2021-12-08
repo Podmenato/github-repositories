@@ -46,6 +46,14 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 					<Typography variant="subtitle1">{user.name}</Typography>
 				</Box>
 			</Box>
+			<Box sx={boxStyle}>
+				<Icon sx={{ marginRight: '10px' }}>
+					<GitHubIcon />
+				</Icon>
+				<Link href={user.html_url}>
+					<Typography variant="h6">{user.html_url}</Typography>
+				</Link>
+			</Box>
 			<Typography variant="h6" sx={{ maxWidth: '400px' }}>
 				{user.bio}
 			</Typography>
@@ -55,6 +63,29 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 						<BusinessIcon />
 					</Icon>
 					<Typography variant="h6">{user.company}</Typography>
+				</Box>
+			)}
+			<Box
+				sx={{
+					display: 'flex',
+					flexDirection: 'row',
+					justifyContent: 'space-evenly',
+					maxWidth: '400px'
+				}}
+			>
+				<Typography variant="h6">Followers: {user.followers}</Typography>
+				<Typography variant="h6">Following: {user.following}</Typography>
+			</Box>
+			<Typography variant="h6">{user.email}</Typography>
+			{user.hireable && <Typography variant="h6">Hireable</Typography>}
+			{user.location && (
+				<Box sx={boxStyle}>
+					<Tooltip title="Location">
+						<Icon sx={{ marginRight: '10px' }}>
+							<PublicIcon />
+						</Icon>
+					</Tooltip>
+					<Typography variant="h6">{user.location}</Typography>
 				</Box>
 			)}
 			{user.created_at && (
@@ -81,37 +112,6 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 							addSuffix: true
 						})}
 					</Typography>
-				</Box>
-			)}
-			<Box
-				sx={{
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'space-evenly',
-					maxWidth: '400px'
-				}}
-			>
-				<Typography variant="h6">Followers: {user.followers}</Typography>
-				<Typography variant="h6">Following: {user.following}</Typography>
-			</Box>
-			<Typography variant="h6">{user.email}</Typography>
-			<Typography variant="h6">{user.hireable}</Typography>
-			<Box sx={boxStyle}>
-				<Icon sx={{ marginRight: '10px' }}>
-					<GitHubIcon />
-				</Icon>
-				<Link href={user.html_url}>
-					<Typography variant="h6">{user.html_url}</Typography>
-				</Link>
-			</Box>
-			{user.location && (
-				<Box sx={boxStyle}>
-					<Tooltip title="Location">
-						<Icon sx={{ marginRight: '10px' }}>
-							<PublicIcon />
-						</Icon>
-					</Tooltip>
-					<Typography variant="h6">{user.location}</Typography>
 				</Box>
 			)}
 		</Paper>
