@@ -7,8 +7,8 @@ const getUserRepos = (username: string, page = 1, per_page = 100) => {
 	return axios.get(url).then(response => response.data);
 };
 
-const getuserData = (username: string, page = 1, per_page = 100) => {
-	const url = `${BASE_URL}/users/${username}?page=${page}&per_page=${per_page}`;
+const getuserData = (username: string) => {
+	const url = `${BASE_URL}/users/${username}`;
 	return axios.get(url).then(response => response.data);
 };
 
