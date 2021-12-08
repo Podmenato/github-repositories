@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Box, Button, TextField } from '@mui/material';
+import { Button, Paper, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 type TProps = {
@@ -14,12 +14,28 @@ const SearchInput: FC<TProps> = ({ callbackFunction }) => {
 	};
 
 	return (
-		<Box sx={{ display: 'flex', flexDirection: 'row' }}>
-			<TextField size="small" value={userInput} onChange={handleChange} />
+		<Paper
+			sx={{
+				display: 'flex',
+				flexDirection: 'row',
+				padding: '5px 5px 5px 10px',
+				maxWidth: '300px'
+			}}
+		>
+			<TextField
+				size="small"
+				value={userInput}
+				variant="standard"
+				onChange={handleChange}
+				label="Github username"
+				sx={{
+					marginRight: '5px'
+				}}
+			/>
 			<Button variant="contained" onClick={() => callbackFunction(userInput)}>
 				<SearchIcon />
 			</Button>
-		</Box>
+		</Paper>
 	);
 };
 
