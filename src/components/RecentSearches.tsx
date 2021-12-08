@@ -6,7 +6,13 @@ type TProps = {
 };
 
 const RecentSearches: FC<TProps> = ({ usernames }) => (
-	<Paper sx={{ padding: '10px', width: '290px' }}>
+	<Paper
+		sx={{
+			'padding': '10px',
+			'width': '290px',
+			'@media (max-width:340px)': { width: '100%' }
+		}}
+	>
 		<Typography variant="h5">Recent Searches</Typography>
 
 		<List>
