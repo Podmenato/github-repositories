@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import RepositoriesList from 'components/RepositoriesList';
 import { getuserData } from 'api/github-api';
 import { TUser } from 'types/TUser';
 import UserDataDisplay from 'components/UserDataDisplay';
@@ -18,6 +19,7 @@ const Users = () => {
 			<SearchInput callbackFunction={fetchUserData} />
 
 			{userData && <UserDataDisplay user={userData} />}
+			{userData && <RepositoriesList userName={userData.login} />}
 		</div>
 	);
 };
