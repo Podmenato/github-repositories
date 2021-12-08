@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import {
 	Avatar,
+	CircularProgress,
 	IconButton,
 	ListItem,
 	ListItemIcon,
@@ -11,6 +12,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import { TOrganization } from 'types/TOrganization';
 import { fetchImage } from 'api/util';
+import { handleFetch } from 'utils/handleFetch';
 
 type TProps = {
 	org: TOrganization;
@@ -18,18 +20,18 @@ type TProps = {
 
 const OrganizationListItem: FC<TProps> = ({ org }) => {
 	const [imageURL, setImageURL] = useState('');
+	const [_error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		const getAvatar = async () => {
-			const imgUrl = await fetchImage(org.avatar_url);
-			setImageURL(imgUrl);
-		};
-		getAvatar();
+		const fetchData = () => fetchImage(org.avatar_url);
+		handleFetch({ setLoading, setError, fetchData, setData: setImageURL });
 	}, [org]);
 	return (
 		<ListItem key={org.login}>
 			<ListItemIcon>
-				<Avatar src={imageURL} />
+				{loading && <CircularProgress color="inherit" size={20} />}
+				{!loading && <Avatar src={imageURL} sx={{ marginRight: '10px' }} />}
 			</ListItemIcon>
 			<ListItemText>{org.login}</ListItemText>
 			<ListItemSecondaryAction>

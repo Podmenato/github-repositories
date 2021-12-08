@@ -11,6 +11,8 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { TRepository } from 'types/TRepository';
 import { getUserRepos } from 'api/github-api';
 import GithubList from 'components/GithubList';
+import { handleFetch } from 'utils/handleFetch';
+import ListSkeleton from 'components/ListSkeleton';
 
 type TProps = {
 	userName: string;
@@ -18,12 +20,13 @@ type TProps = {
 
 const RepositoriesList: FC<TProps> = ({ userName }) => {
 	const [repositories, setRepositories] = useState<TRepository[] | null>(null);
+	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
+
 	useEffect(() => {
-		const fetchRepositories = async () => {
-			const repos: TRepository[] = await getUserRepos(userName);
-			setRepositories(repos);
-		};
-		fetchRepositories();
+		const fetchData = () => getUserRepos(userName);
+		setRepositories(null);
+		handleFetch({ fetchData, setError, setLoading, setData: setRepositories });
 	}, [userName]);
 	return (
 		<GithubList title="Repositories">
@@ -40,6 +43,12 @@ const RepositoriesList: FC<TProps> = ({ userName }) => {
 			{repositories?.length === 0 && (
 				<Typography variant="h6" sx={{ marginLeft: '10px' }}>
 					This user has no created repositories
+				</Typography>
+			)}
+			{loading && <ListSkeleton />}
+			{error && (
+				<Typography variant="h6" color="error">
+					{error}
 				</Typography>
 			)}
 		</GithubList>
