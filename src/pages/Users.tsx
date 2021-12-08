@@ -37,17 +37,19 @@ const Users = () => {
 			<Typography variant="h6" color="error">
 				{error}
 			</Typography>
-			<Grid container spacing={2}>
-				<Grid item xs={12}>
-					{userData && <UserDataDisplay user={userData} />}
+			{!error && (
+				<Grid container spacing={2}>
+					<Grid item xs={12}>
+						{userData && <UserDataDisplay user={userData} />}
+					</Grid>
+					<Grid item xs={12} md={6}>
+						{userData && <RepositoriesList userName={userData.login} />}
+					</Grid>
+					<Grid item xs={12} md={6}>
+						{userData && <OrganizationsList userName={userData.login} />}
+					</Grid>
 				</Grid>
-				<Grid item xs={12} md={6}>
-					{userData && <RepositoriesList userName={userData.login} />}
-				</Grid>
-				<Grid item xs={12} md={6}>
-					{userData && <OrganizationsList userName={userData.login} />}
-				</Grid>
-			</Grid>
+			)}
 		</Box>
 	);
 };
