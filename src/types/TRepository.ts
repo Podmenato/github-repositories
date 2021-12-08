@@ -9,6 +9,6 @@ export type TRepository = {
 	language: string;
 	forks: number;
 	stargazers_count: number;
-	updated_at: Date;
-	pushed_at: Date;
+	updated_at: string;
+	pushed_at: string;
 };

@@ -13,6 +13,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PublicIcon from '@mui/icons-material/Public';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { SxProps } from '@mui/system';
+import { format, formatDistance } from 'date-fns';
 
 import { TUser } from 'types/TUser';
 import { fetchImage } from 'api/util';
@@ -56,18 +57,32 @@ const UserDataDisplay: FC<TProps> = ({ user }) => {
 					<Typography variant="h6">{user.company}</Typography>
 				</Box>
 			)}
-			<Box sx={boxStyle}>
-				<Icon sx={{ marginRight: '10px' }}>
-					<AccessTimeIcon />
-				</Icon>
-				<Typography variant="h6">{user.created_at}</Typography>
-			</Box>
-			<Box sx={boxStyle}>
-				<Icon sx={{ marginRight: '10px' }}>
-					<AccessTimeIcon />
-				</Icon>
-				<Typography variant="h6">{user.updated_at}</Typography>
-			</Box>
+			{user.created_at && (
+				<Box sx={boxStyle}>
+					<Tooltip title="Created">
+						<Icon sx={{ marginRight: '10px' }}>
+							<AccessTimeIcon />
+						</Icon>
+					</Tooltip>
+					<Typography variant="h6">
+						{format(new Date(user.created_at), 'MM/dd/yyyy')}
+					</Typography>
+				</Box>
+			)}
+			{user.updated_at && (
+				<Box sx={boxStyle}>
+					<Tooltip title="Last updated">
+						<Icon sx={{ marginRight: '10px' }}>
+							<AccessTimeIcon />
+						</Icon>
+					</Tooltip>
+					<Typography variant="h6">
+						{formatDistance(new Date(user.updated_at), Date.now(), {
+							addSuffix: true
+						})}
+					</Typography>
+				</Box>
+			)}
 			<Box
 				sx={{
 					display: 'flex',
