@@ -3,7 +3,8 @@ import {
 	IconButton,
 	ListItem,
 	ListItemSecondaryAction,
-	ListItemText
+	ListItemText,
+	Typography
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
@@ -36,6 +37,11 @@ const RepositoriesList: FC<TProps> = ({ userName }) => {
 					</ListItemSecondaryAction>
 				</ListItem>
 			))}
+			{repositories?.length === 0 && (
+				<Typography variant="h6" sx={{ marginLeft: '10px' }}>
+					This user has no created repositories
+				</Typography>
+			)}
 		</GithubList>
 	);
 };
