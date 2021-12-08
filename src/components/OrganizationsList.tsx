@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Box, List, Typography } from '@mui/material';
 
 import { TOrganization } from 'types/TOrganization';
 import { getuserOrgs } from 'api/github-api';
+import GithubList from 'components/GithubList';
 import OrganizationListItem from 'components/OrganizationListItem';
 
 type TProps = {
@@ -21,19 +21,11 @@ const OrganizationsList: FC<TProps> = ({ userName }) => {
 		fetchOrgs();
 	}, [userName]);
 	return (
-		<Box>
-			<Typography variant="h5">Organizations</Typography>
-			<List
-				sx={{
-					height: '300px',
-					overflow: 'scroll'
-				}}
-			>
-				{organizations?.map((org: TOrganization) => (
-					<OrganizationListItem org={org} key={org.login} />
-				))}
-			</List>
-		</Box>
+		<GithubList title="Organizations">
+			{organizations?.map((org: TOrganization) => (
+				<OrganizationListItem org={org} key={org.login} />
+			))}
+		</GithubList>
 	);
 };
 

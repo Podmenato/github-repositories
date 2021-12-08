@@ -1,17 +1,15 @@
 import React, { FC, useEffect, useState } from 'react';
 import {
-	Box,
 	IconButton,
-	List,
 	ListItem,
 	ListItemSecondaryAction,
-	ListItemText,
-	Typography
+	ListItemText
 } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import { TRepository } from 'types/TRepository';
 import { getUserRepos } from 'api/github-api';
+import GithubList from 'components/GithubList';
 
 type TProps = {
 	userName: string;
@@ -27,26 +25,18 @@ const RepositoriesList: FC<TProps> = ({ userName }) => {
 		fetchRepositories();
 	}, [userName]);
 	return (
-		<Box>
-			<Typography variant="h5">Repositories</Typography>
-			<List
-				sx={{
-					height: '300px',
-					overflow: 'scroll'
-				}}
-			>
-				{repositories?.map((repo: TRepository) => (
-					<ListItem key={repo.full_name}>
-						<ListItemText>{repo.name}</ListItemText>
-						<ListItemSecondaryAction>
-							<IconButton>
-								<KeyboardArrowRightIcon />
-							</IconButton>
-						</ListItemSecondaryAction>
-					</ListItem>
-				))}
-			</List>
-		</Box>
+		<GithubList title="Repositories">
+			{repositories?.map((repo: TRepository) => (
+				<ListItem key={repo.full_name}>
+					<ListItemText>{repo.name}</ListItemText>
+					<ListItemSecondaryAction>
+						<IconButton>
+							<KeyboardArrowRightIcon />
+						</IconButton>
+					</ListItemSecondaryAction>
+				</ListItem>
+			))}
+		</GithubList>
 	);
 };
 
