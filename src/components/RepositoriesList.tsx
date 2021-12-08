@@ -20,7 +20,7 @@ type TProps = {
 
 const RepositoriesList: FC<TProps> = ({ userName }) => {
 	const [repositories, setRepositories] = useState<TRepository[] | null>(null);
-	const [error, setError] = useState<string | null>(null);
+	const [_error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
 
 	const openNewTab = (url: string) => {
@@ -51,11 +51,6 @@ const RepositoriesList: FC<TProps> = ({ userName }) => {
 				</Typography>
 			)}
 			{loading && <ListSkeleton />}
-			{error && (
-				<Typography variant="h6" color="error">
-					{error}
-				</Typography>
-			)}
 		</GithubList>
 	);
 };

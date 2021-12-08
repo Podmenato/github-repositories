@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
 import { getuserData } from 'api/github-api';
 import { TUser } from 'types/TUser';
@@ -34,9 +34,6 @@ const Users = () => {
 			}}
 		>
 			<SearchInput callbackFunction={fetchUserData} loading={loading} />
-			<Typography variant="h6" color="error">
-				{error}
-			</Typography>
 			{!error && (
 				<Grid container spacing={2}>
 					<Grid item xs={12}>

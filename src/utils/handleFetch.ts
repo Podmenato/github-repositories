@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+import { errorNotify } from 'utils/notify';
 export const handleFetch = async <T extends unknown>({
 	setLoading,
 	setError,
@@ -21,6 +23,7 @@ export const handleFetch = async <T extends unknown>({
 			message += ` Reason: ${e.message}`;
 		}
 		setError(message);
+		errorNotify(message);
 	} finally {
 		setLoading(false);
 	}
