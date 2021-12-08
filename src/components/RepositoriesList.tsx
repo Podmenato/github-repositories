@@ -1,5 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
-import { List, ListItem, ListItemText } from '@mui/material';
+import {
+	Box,
+	IconButton,
+	List,
+	ListItem,
+	ListItemSecondaryAction,
+	ListItemText,
+	Typography
+} from '@mui/material';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import { TRepository } from 'types/TRepository';
 import { getUserRepos } from 'api/github-api';
@@ -18,13 +27,26 @@ const RepositoriesList: FC<TProps> = ({ userName }) => {
 		fetchRepositories();
 	}, [userName]);
 	return (
-		<List>
-			{repositories?.map((repo: TRepository) => (
-				<ListItem key={repo.full_name}>
-					<ListItemText>{repo.full_name}</ListItemText>
-				</ListItem>
-			))}
-		</List>
+		<Box>
+			<Typography variant="h5">Repositories</Typography>
+			<List
+				sx={{
+					height: '300px',
+					overflow: 'scroll'
+				}}
+			>
+				{repositories?.map((repo: TRepository) => (
+					<ListItem key={repo.full_name}>
+						<ListItemText>{repo.name}</ListItemText>
+						<ListItemSecondaryAction>
+							<IconButton>
+								<KeyboardArrowRightIcon />
+							</IconButton>
+						</ListItemSecondaryAction>
+					</ListItem>
+				))}
+			</List>
+		</Box>
 	);
 };
 
