@@ -2,13 +2,10 @@ import React, { FC, useEffect, useState } from 'react';
 import {
 	Avatar,
 	CircularProgress,
-	IconButton,
 	ListItem,
 	ListItemIcon,
-	ListItemSecondaryAction,
 	ListItemText
 } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 import { TOrganization } from 'types/TOrganization';
 import { fetchImage } from 'api/util';
@@ -34,11 +31,6 @@ const OrganizationListItem: FC<TProps> = ({ org }) => {
 				{!loading && <Avatar src={imageURL} sx={{ marginRight: '10px' }} />}
 			</ListItemIcon>
 			<ListItemText>{org.login}</ListItemText>
-			<ListItemSecondaryAction>
-				<IconButton>
-					<KeyboardArrowRightIcon />
-				</IconButton>
-			</ListItemSecondaryAction>
 		</ListItem>
 	);
 };
